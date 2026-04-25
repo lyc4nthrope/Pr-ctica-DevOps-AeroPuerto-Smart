@@ -36,7 +36,7 @@ Ademas, no me sirve que estas ramas existan solo en mi equipo local. Tambien nec
 
 ### Ramas principales
 
-- `main`: la uso para conservar la version estable del proyecto.
+- `main`: la uso para conservar la version estable del proyecto. Para mi, esta es la rama que representa lo que ya esta aprobado, organizado y listo para entregar o publicar, por eso no la uso como rama de trabajo diario.
 - `develop`: la uso para integrar los cambios que ya pasaron por revision y pruebas basicas.
 
 ### Ramas de trabajo individual
@@ -60,6 +60,8 @@ Decidi crear estas ramas porque cada una cumple una funcion concreta dentro del 
 - `release/preproduccion` me permite validar una entrega antes de considerarla lista para produccion.
 - `hotfix/produccion` me permite atender fallos urgentes sin alterar el flujo normal de desarrollo.
 
+En mi caso, la rama `main` no desaparece por tener varias ramas. Al contrario, se vuelve mas importante, porque es la que uso para guardar la version mas confiable del proyecto. Yo la dejo como referencia de estabilidad, mientras que el trabajo del dia a dia ocurre en las otras ramas.
+
 Tambien decidi subirlas a GitHub porque asi el flujo no depende de un solo computador. De esa manera:
 
 - cada integrante puede trabajar sobre su rama desde el remoto
@@ -80,6 +82,8 @@ Yo planteo el flujo asi:
 6. Si aparece un error critico en una version liberada, se corrige desde `hotfix/produccion`.
 
 En otras palabras, yo no cree estas ramas solo por orden. Las cree para que el proyecto tenga una estructura de trabajo mas profesional, mas controlada y mas alineada con DevOps tanto en local como en GitHub.
+
+Dicho mas simple, `main` es la rama donde dejo lo que ya considero terminado y estable. Las demas ramas existen para ayudarme a llegar a ese punto sin desordenar la version principal.
 
 ## Relacion con CI/CD
 
