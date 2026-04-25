@@ -149,9 +149,9 @@ DevOps también es cultura de colaboración:
 
 ---
 
-## 5. Entonces, ¿qué te está pidiendo realmente esta práctica?
+## 5. Entonces, ¿qué está pidiendo realmente esta práctica?
 
-La práctica no te está pidiendo solo “instalar herramientas”.
+La práctica no está pidiendo solo “instalar herramientas”.
 
 Lo que realmente te pide es:
 
@@ -163,7 +163,7 @@ Lo que realmente te pide es:
 
 En otras palabras:
 
-**Debes pasar de un proceso desordenado y manual a una propuesta mínima, organizada y automatizada.**
+**Es pasar de un proceso desordenado y manual a una propuesta mínima, organizada y automatizada.**
 
 ---
 
@@ -173,7 +173,7 @@ En otras palabras:
 
 Esta fase busca que entiendas el problema antes de construir nada.
 
-### ¿Qué debes hacer aquí?
+### ¿Qué se debe hacer aquí?
 
 - Explicar qué es DevOps.
 - Relacionar DevOps con el caso de AeroPuerto Smart.
@@ -219,7 +219,7 @@ Piensa en una línea de producción:
 
 Eso es un pipeline, pero aplicado al software.
 
-### ¿Qué te piden diseñar?
+### ¿Qué piden diseñar?
 
 Un pipeline básico de **CI/CD** para FlyTrack.
 
@@ -233,7 +233,7 @@ Quiere decir que cada vez que alguien agrega cambios al proyecto, esos cambios s
 
 Quiere decir que, después de validar el software, este puede quedar listo para publicarse o incluso publicarse automáticamente.
 
-### ¿Qué etapas debería tener tu pipeline?
+### ¿Qué etapas debería tener un pipeline?
 
 El documento pide incluir al menos estas:
 
@@ -429,9 +429,7 @@ Esto ya demuestra la idea central de DevOps sin volver el laboratorio innecesari
 
 ---
 
-## 9. ¿Qué deberías explicar cuando te pregunten “qué se va a trabajar”?
-
-Puedes explicarlo así:
+## 9. ¿Qué se explica cuando pregunten “qué se va a trabajar”?
 
 ### Se va a trabajar en el proceso de desarrollo y despliegue del software
 
@@ -464,9 +462,7 @@ Sirve para lograr:
 
 ---
 
-## 10. ¿Qué deberías entender tú, como estudiante, después de esta práctica?
-
-Al terminar esta práctica deberías poder entender que:
+## 10. ¿Como estudiante, después de esta práctica que aprendería?
 
 - DevOps no es solo “usar Docker” o “usar GitHub”.
 - DevOps busca mejorar la forma de trabajar del equipo.
@@ -501,7 +497,7 @@ Este podría ser el flujo que quieres proponer como mejora:
 
 ## 12. Posibles entregables del laboratorio
 
-Si quieres organizar bien el trabajo, los entregables podrían quedar así:
+Los entregables podrían quedar así:
 
 ### Entregable 1: Diagnóstico
 
@@ -533,29 +529,6 @@ Documento técnico explicando decisiones, resultados y aprendizajes.
 
 Explicación oral del problema, la solución y el funcionamiento del pipeline.
 
----
-
-## 13. Qué no deberías confundir en esta práctica
-
-Hay varias ideas que conviene separar:
-
-### DevOps no es solo programar
-
-También incluye despliegue, pruebas, automatización, documentación y colaboración.
-
-### DevOps no es solo una herramienta
-
-Las herramientas ayudan, pero lo importante es el proceso que construyes.
-
-### Más herramientas no significa mejor solución
-
-Una solución simple, bien explicada y funcional vale más que una solución llena de herramientas mal entendidas.
-
-### Automatizar no significa perder control
-
-Al contrario: automatizar bien significa tener más consistencia y menos improvisación.
-
----
 
 ## 14. Resumen corto del laboratorio
 
@@ -580,7 +553,7 @@ Si lo dijéramos de la manera más simple posible:
 Esta guía fue construida a partir del documento:
 
 **Práctica DevOps: AeroPuerto Smart**
-Universidad del Quindio
+Universidad del Quindío
 Facultad de Ingeniería
 Programa de Ingeniería de Sistemas y Computación
 Ingeniería de Software III
