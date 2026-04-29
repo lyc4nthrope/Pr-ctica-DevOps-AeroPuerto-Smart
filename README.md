@@ -1,301 +1,342 @@
-# AeroPuerto Smart - Mi propuesta DevOps
-
-## Descripcion del proyecto
-
-En este repositorio presento mi propuesta de trabajo para el caso **AeroPuerto Smart**, tomando como base la aplicacion **FlyTrack**. Yo entiendo este laboratorio como un ejercicio donde no solo debo hablar del software, sino tambien de la forma en que el equipo lo desarrolla, lo prueba, lo integra y lo despliega.
-
-La aplicacion FlyTrack permite consultar itinerarios, recibir notificaciones, ver puertas de embarque y reportar problemas con equipaje. El problema del caso no es que la aplicacion no exista, sino que el proceso actual para trabajarla es manual, lento, desordenado y propenso a errores.
-
-## Que me pide realmente esta practica
-
-Yo entiendo que esta practica no me pide solo instalar herramientas. Lo que realmente me pide es:
-
-1. Entender el problema actual.
-2. Explicar por que DevOps seria util.
-3. Diseñar una forma mas ordenada de trabajar.
-4. Implementar una version minima viable de esa mejora.
-5. Documentar lo que hice y poder defenderlo.
-
-En otras palabras, yo debo pasar de un proceso manual y desordenado a una propuesta organizada, trazable y automatizable.
-
-## Preguntas del documento que estoy respondiendo
-
-Estas son las preguntas o puntos centrales que yo estoy resolviendo en este `README`:
-
-1. ¿De que trata la practica?
-2. ¿Que es DevOps?
-3. ¿Por que DevOps es importante en este caso?
-4. ¿Que problemas actuales resuelve DevOps en AeroPuerto Smart?
-5. ¿Que me pide realmente la practica?
-6. ¿Como explico cada fase del laboratorio?
-7. ¿Que herramientas menciona la practica y para que sirven?
-8. ¿Cual seria una solucion razonable para este laboratorio?
-9. ¿Que se va a trabajar?
-10. ¿Que deberia entender yo despues de esta practica?
-11. ¿Cual seria un flujo ideal para FlyTrack?
-12. ¿Cuales podrian ser los entregables del laboratorio?
-13. ¿Que cosas no deberia confundir dentro de la practica?
-14. ¿Cual es mi resumen corto del laboratorio?
-15. ¿Como organizo las ramas del proyecto de acuerdo con DevOps?
-
-## 1. ¿De que trata esta practica?
-
-Para mi, esta practica trata de analizar un caso donde existe una aplicacion util, pero el proceso de desarrollo y despliegue funciona mal. En AeroPuerto Smart hay demoras, errores en despliegue, poco control de versiones, falta de pruebas automatizadas e infraestructura configurada manualmente.
-
-Yo resumiria el problema asi: el software existe, pero la forma de trabajarlo no esta bien organizada.
-
-## 2. ¿Que es DevOps?
-
-Yo explico DevOps como una forma de trabajo que busca unir desarrollo y operaciones para que el software se construya, pruebe, despliegue y mantenga de manera mas rapida, mas segura y mas ordenada.
-
-Para mi, DevOps no es solo una herramienta. Es una combinacion de:
-
-- organizacion del equipo
-- automatizacion
-- buenas practicas
-- control de cambios
-- colaboracion entre roles
-
-En palabras simples, yo diria que DevOps sirve para trabajar mejor y hacer que el software sea mas confiable.
-
-## 3. ¿Por que DevOps es importante en este caso?
-
-Yo considero que DevOps es importante en AeroPuerto Smart porque FlyTrack afecta procesos que tienen impacto real en los pasajeros y en la operacion del aeropuerto. Un error aqui no es solo tecnico, tambien puede causar confusion, retrasos, mala informacion y mala imagen para la organizacion.
-
-Por eso yo aplico DevOps en este caso:
-
-- porque ayuda a publicar cambios sin improvisacion
-- porque reduce el riesgo de errores en produccion
-- porque acelera la entrega de mejoras
-- porque obliga a ordenar mejor el trabajo
-- porque mejora la coordinacion del equipo
-
-## 4. ¿Que problemas actuales resuelve DevOps en AeroPuerto Smart?
-
-Yo identifico estos problemas principales y asi entiendo que DevOps los ayuda a resolver:
-
-### 4.1. Las actualizaciones tardan demasiado
-
-Si las pruebas y despliegues se hacen manualmente, todo tarda mas. Yo veo que DevOps ayuda aqui mediante automatizacion para reducir tiempos y pasos repetitivos.
-
-### 4.2. Cada despliegue puede provocar errores
-
-Cuando alguien publica cambios manualmente, es facil olvidar algo o usar una configuracion incorrecta. Yo veo que DevOps reduce esto al definir un proceso repetible y controlado.
-
-### 4.3. No hay control adecuado de versiones
-
-Si no se organizan bien ramas, commits y cambios, despues es dificil saber quien hizo algo, cuando lo hizo y como volver atras. Yo entiendo que DevOps impulsa el uso correcto de Git y GitHub para dar trazabilidad.
-
-### 4.4. No hay pruebas automatizadas
-
-Si no se prueban los cambios de manera automatica, cualquier mejora puede romper algo que ya funcionaba. Por eso yo considero clave agregar pruebas dentro del flujo.
-
-### 4.5. La infraestructura se configura manualmente
-
-Si cada entorno se arma a mano, el sistema se vuelve fragil y dificil de repetir. Yo veo que DevOps ayuda a volver los entornos mas predecibles y replicables.
-
-### 4.6. La comunicacion entre equipos es limitada
-
-Yo tambien entiendo DevOps como una cultura de colaboracion. Si desarrollo, soporte y operaciones trabajan separados, el proceso se rompe con facilidad. Por eso documentar, compartir responsabilidades y centralizar el flujo tambien hace parte de la solucion.
-
-## 5. ¿Como explico las fases del laboratorio?
-
-### Fase 1: Investigacion y diagnostico
-
-En esta fase yo debo entender el problema antes de construir nada. Aqui debo explicar que es DevOps, relacionarlo con el caso, describir el flujo actual de trabajo e identificar que practicas podrian mejorar la situacion.
-
-Para mi, esta fase sirve para justificar por que la propuesta tiene sentido.
-
-### Fase 2: Diseño del pipeline DevOps
-
-Aqui yo ya no me limito a describir el problema, sino que propongo una solucion organizada. Yo entiendo el pipeline como una secuencia automatica de pasos que sigue el software desde que alguien hace un cambio hasta que ese cambio queda listo para usarse.
-
-Las etapas minimas que yo incluiria son:
-
-1. compilacion o construccion
-2. pruebas automatizadas
-3. analisis de calidad
-4. despliegue automatizado
-
-Tambien tengo claro que primero conviene publicar en `staging` y despues en `produccion`.
-
-### Fase 3: Implementacion practica minima viable
-
-En esta fase yo llevo la idea a algo funcional, aunque sea sencillo. Para mi, el minimo razonable incluye:
-
-- repositorio con control de versiones
-- pruebas unitarias automatizadas
-- uso de contenedores con Docker
-- una automatizacion basica de despliegue
-
-### Fase 4: Informe y presentacion
-
-Aqui yo debo demostrar que entiendo lo que hice. En el informe explicaria el problema inicial, el flujo actual, las herramientas elegidas, el pipeline propuesto, lo que logre automatizar y las limitaciones que todavia quedan.
-
-## 6. ¿Que herramientas menciona la practica y para que sirven?
-
-Estas son las herramientas que yo entiendo como mas importantes en el contexto del laboratorio:
-
-- `Git`: lo uso para control de versiones.
-- `GitHub`: lo uso para alojar el repositorio, colaborar y centralizar el trabajo.
-- `GitHub Actions`, `GitLab CI` o `Jenkins`: los veo como opciones para automatizar el pipeline.
-- `Docker`: lo uso para empaquetar la aplicacion en un contenedor.
-- `Docker Compose`: me sirve si necesito levantar varios servicios juntos.
-- `Kubernetes`: lo entiendo como una opcion mas avanzada para orquestacion, pero no la considero obligatoria para una practica minima viable.
-- `SonarQube`: lo veo util para analisis de calidad del codigo.
-
-## 7. ¿Cual seria una solucion razonable para este laboratorio?
-
-Yo plantearia una solucion simple pero defendible:
-
-1. Crear el repositorio del proyecto en GitHub.
-2. Organizar el trabajo con ramas.
-3. Agregar pruebas unitarias basicas.
-4. Crear un `Dockerfile`.
-5. Usar `docker-compose.yml` si hace falta levantar servicios relacionados.
-6. Configurar un workflow de CI/CD.
-7. Automatizar instalacion, pruebas, validacion y construccion.
-8. Dejar documentado todo el proceso.
-
-Para mi, eso ya demuestra bien la idea central de DevOps sin volver la practica innecesariamente compleja.
-
-## 8. ¿Que se va a trabajar?
-
-Yo explicaria que en esta practica se va a trabajar en el proceso de desarrollo y despliegue del software, no solo en programar una aplicacion.
-
-Yo diria que se va a trabajar en:
-
-- como se guarda el codigo
-- como se validan los cambios
-- como se prueban automaticamente
-- como se empaqueta la aplicacion
-- como se publica de forma controlada
-- como se documenta el proceso
-
-## 9. ¿Que deberia entender yo despues de esta practica?
-
-Al terminar esta practica, yo deberia entender que:
-
-- DevOps no es solo usar Docker o GitHub
-- DevOps busca mejorar la forma de trabajar del equipo
-- automatizar reduce errores
-- probar antes de desplegar evita problemas
-- documentar el proceso tambien es trabajo tecnico
-- un buen pipeline ayuda a que el software sea mas estable
-
-## 10. ¿Cual seria mi flujo ideal para FlyTrack?
-
-Mi flujo ideal seria este:
-
-1. Cada desarrollador hace cambios pequenos y claros.
-2. Sube esos cambios al repositorio.
-3. El sistema ejecuta pruebas automaticamente.
-4. Se analiza la calidad del codigo.
-5. Si todo esta bien, se construye la aplicacion.
-6. Se empaqueta con Docker.
-7. Se despliega primero a `staging`.
-8. Si todo funciona bien, se aprueba el paso a produccion.
-
-Yo veo este flujo como una mejora clara porque evita improvisacion, reduce errores y hace visible el estado del proyecto.
-
-## 11. ¿Cuales podrian ser los entregables del laboratorio?
-
-Yo organizaria los entregables asi:
-
-- diagnostico del problema y del flujo actual
-- diseño del pipeline CI/CD
-- implementacion minima viable
-- informe final
-- presentacion
-
-## 12. ¿Que cosas no debo confundir en esta practica?
-
-Yo tengo claro que:
-
-- DevOps no es solo programar
-- DevOps no es solo una herramienta
-- usar mas herramientas no significa tener una mejor solucion
-- automatizar no significa perder control, sino ganar consistencia
-
-## 13. ¿Cual es mi resumen corto del laboratorio?
-
-Yo resumiria esta practica asi: debo tomar un caso con problemas de organizacion, calidad y despliegue, y convertirlo en una propuesta de trabajo mas ordenada, automatizada y confiable usando principios DevOps.
-
-## 14. Estrategia de ramas que voy a usar
-
-Para este proyecto voy a trabajar con una estructura de ramas inspirada en Git Flow, porque es facil de entender en un entorno academico y encaja bien con una practica DevOps donde necesito separar desarrollo, integracion, liberaciones y correcciones urgentes.
-
-Ademas, no me sirve que estas ramas existan solo en mi equipo local. Tambien necesito que esten en GitHub, porque ahi es donde puedo centralizar el trabajo del grupo, revisar cambios, abrir pull requests y dejar trazabilidad real del proceso. Si las ramas no existen en GitHub, el flujo colaborativo queda incompleto.
-
-### Ramas principales
-
-- `main`: la uso para conservar la version estable del proyecto. Para mi, esta es la rama que representa lo que ya esta aprobado, organizado y listo para entregar o publicar, por eso no la uso como rama de trabajo diario.
-- `develop`: la uso para integrar los cambios que ya pasaron por revision y pruebas basicas.
-
-### Ramas de trabajo individual
-
-- `feature/camilo`: la uso para los cambios individuales de Camilo.
-- `feature/jeyson`: la uso para los cambios individuales de Jeyson.
-- `feature/cristhian`: la uso para los cambios individuales de Cristhian.
-
-### Ramas de soporte al flujo DevOps
-
-- `release/preproduccion`: la uso para preparar una entrega antes de pasarla a `main`.
-- `hotfix/produccion`: la uso para corregir errores criticos detectados en una version ya liberada.
-
-## 15. ¿Por que cree estas ramas?
-
-Yo decidi crear estas ramas porque cada una cumple una funcion concreta dentro del flujo DevOps:
-
-- `main` me sirve para proteger la version estable y evitar mezclar trabajo incompleto con la entrega final
-- `develop` me sirve como punto de integracion continua antes de publicar cambios
-- las ramas `feature/*` me permiten que cada integrante trabaje por separado, con mejor trazabilidad y menos conflictos
-- `release/preproduccion` me permite validar una entrega antes de considerarla lista para produccion
-- `hotfix/produccion` me permite atender fallos urgentes sin alterar el flujo normal de desarrollo
-
-En mi caso, la rama `main` no desaparece por tener varias ramas. Al contrario, se vuelve mas importante, porque es la que uso para guardar la version mas confiable del proyecto. Yo la dejo como referencia de estabilidad, mientras que el trabajo del dia a dia ocurre en las otras ramas.
-
-Tambien decidi subirlas a GitHub porque asi el flujo no depende de un solo computador. De esa manera:
-
-- cada integrante puede trabajar sobre su rama desde el remoto
-- los cambios quedan visibles para todo el equipo
-- puedo usar pull requests como parte del control de calidad
-- la integracion en `develop` queda mejor organizada
-- el historial del proyecto queda documentado de forma centralizada
-
-## 16. ¿Como entiendo el flujo de trabajo con estas ramas?
-
-Yo planteo el flujo asi:
-
-1. Cada integrante trabaja en su propia rama `feature/*`.
-2. Cuando termina una tarea, integra sus cambios en `develop`.
-3. En `develop` se ejecutan validaciones, pruebas y revision general.
-4. Cuando se va a preparar una entrega, se pasa a `release/preproduccion`.
-5. Si todo queda correcto, la liberacion pasa a `main`.
-6. Si aparece un error critico en una version liberada, se corrige desde `hotfix/produccion`.
-
-Dicho mas simple, `main` es la rama donde dejo lo que ya considero terminado y estable. Las demas ramas existen para ayudarme a llegar a ese punto sin desordenar la version principal.
-
-## 17. Relacion con CI/CD
-
-Esta estructura de ramas tiene sentido para DevOps porque facilita automatizar acciones por entorno o por tipo de cambio. Por ejemplo:
-
-- en `feature/*` puedo ejecutar validaciones rapidas
-- en `develop` puedo ejecutar integracion continua
-- en `release/*` puedo preparar pruebas de preproduccion
-- en `main` puedo dejar listo el despliegue de la version estable
-- en `hotfix/*` puedo acelerar correcciones urgentes
-
-## Integrantes y ramas asignadas
-
-- Camilo: `feature/camilo`
-- Jeyson: `feature/jeyson`
-- Cristhian: `feature/cristhian`
-
-## Conclusion
-
-En esta practica no solo quiero mostrar herramientas, sino demostrar que entiendo por que es importante ordenar el trabajo. Por eso documente tanto las respuestas del documento como la estrategia de ramas, todo en primera persona y alineado con DevOps.
-
-## Fuente de contexto
-
-Yo construyo esta explicacion a partir del documento de la practica **AeroPuerto Smart** de la Universidad del Quindio para responder sus preguntas principales con una propuesta propia.
+# FlyTrack — Práctica DevOps: AeroPuerto Smart
+
+**Universidad del Quindío · Ingeniería de Software III**
+
+Práctica de laboratorio DevOps sobre el caso AeroPuerto Smart. El objetivo no es construir una aplicación compleja sino demostrar un ciclo completo de DevOps: control de versiones, pruebas automatizadas, análisis de calidad, empaquetado con contenedores y despliegue automático a staging.
+
+---
+
+## Estado del pipeline
+
+| Job | Estado |
+|-----|--------|
+| Pruebas (32) + JaCoCo | ✅ Pasando |
+| Build JAR | ✅ Pasando |
+| Imagen Docker en GHCR | ✅ Publicada |
+
+**Imagen en staging:**
+```bash
+docker pull ghcr.io/lyc4nthrope/flytrack:latest
+docker run -p 8080:8080 ghcr.io/lyc4nthrope/flytrack:latest
+```
+
+---
+
+## ¿Qué es FlyTrack?
+
+FlyTrack es la API REST de AeroPuerto Smart. Permite a los pasajeros consultar vuelos, conocer la puerta de embarque y reportar inconvenientes con su equipaje.
+
+### Endpoints disponibles
+
+| Método | Ruta | Descripción | Respuesta |
+|--------|------|-------------|-----------|
+| `GET` | `/api/vuelos/{id}` | Consultar información de un vuelo por ID | `200 OK` / `404 Not Found` |
+| `GET` | `/api/puertas/{vuelo}` | Consultar puerta de embarque por número de vuelo | `200 OK` / `404 Not Found` |
+| `POST` | `/api/equipaje/reporte` | Crear reporte de inconveniente con equipaje | `201 Created` / `400 Bad Request` |
+
+### Ejemplos de uso
+
+```bash
+# Consultar vuelo
+curl http://localhost:8080/api/vuelos/1
+
+# Respuesta
+{
+  "id": 1,
+  "numero": "AV101",
+  "origen": "Bogotá",
+  "destino": "Medellín",
+  "hora": "08:00",
+  "estado": "A tiempo"
+}
+```
+
+```bash
+# Consultar puerta de embarque
+curl http://localhost:8080/api/puertas/AV101
+
+# Respuesta
+{
+  "puerta": "A12",
+  "vuelo": "AV101",
+  "terminal": "Terminal Norte"
+}
+```
+
+```bash
+# Reportar equipaje
+curl -X POST http://localhost:8080/api/equipaje/reporte \
+  -H "Content-Type: application/json" \
+  -d '{"pasajero":"Juan Pérez","vuelo":"AV101","descripcion":"Maleta perdida"}'
+
+# Respuesta
+{
+  "id": 1,
+  "pasajero": "Juan Pérez",
+  "vuelo": "AV101",
+  "descripcion": "Maleta perdida"
+}
+```
+
+---
+
+## Arquitectura de la aplicación
+
+```
+src/main/java/co/edu/uniquindio/flytrack/
+├── controller/
+│   ├── VuelosController.java      ← recibe peticiones HTTP, delega al service
+│   ├── PuertasController.java
+│   └── EquipajeController.java
+├── service/
+│   ├── VuelosService.java         ← lógica de negocio, datos en memoria
+│   ├── PuertasService.java
+│   └── EquipajeService.java
+└── model/
+    ├── Vuelo.java                 ← POJO sin anotaciones de framework
+    ├── Puerta.java
+    └── ReporteEquipaje.java
+```
+
+**Patrón**: Controller → Service → Model. Sin base de datos — los datos viven en memoria con `List<T>`. El foco del laboratorio es DevOps, no persistencia.
+
+**Decisiones técnicas:**
+
+| Decisión | Por qué |
+|----------|---------|
+| Constructor injection (no `@Autowired` en campos) | Patrón recomendado por Spring; facilita las pruebas y hace las dependencias explícitas |
+| `Optional<T>` en búsquedas | Elimina `NullPointerException`; el controlador está obligado a manejar el caso 404 |
+| `List.copyOf()` en retornos de servicio | Devuelve colección inmutable; el cliente no puede mutar el estado interno del servicio |
+| `AtomicLong` para generación de IDs | Thread-safe sin sincronización explícita |
+| Sin Lombok | Sin dependencia extra; el código es explícito y legible |
+
+---
+
+## Pipeline CI/CD
+
+El pipeline corre automáticamente en GitHub Actions en cada push o pull request a `develop` y `main`.
+
+```
+Push / Pull Request
+       │
+       ▼
+  ┌─────────────────────────────────────────┐
+  │          Integración Continua           │
+  │                                         │
+  │  [test]  mvn verify                     │
+  │  · 32 pruebas JUnit 5                   │
+  │  · Reporte Surefire (resultados)        │
+  │  · Reporte JaCoCo (cobertura 87%)       │
+  │         │                               │
+  │         ▼ pasa                          │
+  │  [build] mvn package -DskipTests        │
+  │  · JAR ejecutable (Spring Boot)         │
+  └─────────────────────────────────────────┘
+       │ pasa + es push (no PR)
+       ▼
+  ┌─────────────────────────────────────────┐
+  │           Entrega Continua              │
+  │                                         │
+  │  [docker-publish]                       │
+  │  · Build imagen Docker multi-stage      │
+  │  · Push a ghcr.io/lyc4nthrope/flytrack  │
+  │    → :latest                            │
+  │    → :<SHA del commit>                  │
+  └─────────────────────────────────────────┘
+```
+
+Si cualquier prueba falla en `[test]`, el pipeline se detiene. Nada llega a staging sin pasar las pruebas.
+
+### Artefactos publicados por el pipeline
+
+| Artefacto | Contenido |
+|-----------|-----------|
+| `surefire-reports` | Resultados XML/HTML de las 32 pruebas |
+| `jacoco-report` | Reporte HTML de cobertura de código |
+| `flytrack-jar` | JAR ejecutable listo para despliegue |
+
+---
+
+## Herramientas utilizadas
+
+### Git
+**Qué es:** sistema de control de versiones distribuido.
+**Para qué se usó:** registrar cada cambio del proyecto con autor, fecha y descripción. Permite ver el historial completo, volver a cualquier versión anterior y trabajar en paralelo sin conflictos.
+
+### GitHub
+**Qué es:** plataforma de alojamiento de repositorios Git con herramientas de colaboración.
+**Para qué se usó:** alojar el repositorio, revisar cambios antes de integrarlos (pull requests) y como punto de integración para el pipeline CI/CD.
+
+### Git Flow (estrategia de ramas)
+**Qué es:** convención de organización de ramas en Git.
+**Para qué se usó:** separar el trabajo de cada integrante del equipo y definir un flujo claro desde desarrollo hasta producción.
+
+```
+main                  ← código estable en producción
+develop               ← integración continua del equipo
+feature/cristhian     ← trabajo de Cristhian Osorio
+feature/camilo        ← trabajo de Camilo
+feature/jeyson        ← trabajo de Jeyson
+release/preproduccion ← preparación de releases
+hotfix/produccion     ← correcciones urgentes en producción
+```
+
+Cada feature se integra a `develop` con `merge --no-ff` para preservar la trazabilidad en el historial.
+
+### Java 17 (Temurin)
+**Qué es:** versión LTS de Java con soporte extendido, distribución Eclipse Temurin (OpenJDK).
+**Para qué se usó:** lenguaje de implementación de FlyTrack. LTS garantiza soporte y compatibilidad a largo plazo.
+
+### Spring Boot 3.2.5
+**Qué es:** framework de Java que simplifica la creación de aplicaciones web con configuración mínima.
+**Para qué se usó:** construir la API REST de FlyTrack. Provee el servidor web embebido (Tomcat), mapeo de rutas HTTP, serialización JSON automática y el contexto de inyección de dependencias.
+
+### Maven 3.9
+**Qué es:** herramienta de construcción y gestión de dependencias para proyectos Java.
+**Para qué se usó:** compilar el código, ejecutar las pruebas, generar el JAR ejecutable y coordinar los plugins (JaCoCo, Spring Boot). Define el ciclo de vida del proyecto (compile → test → package → verify).
+
+### JUnit 5
+**Qué es:** framework de pruebas unitarias para Java.
+**Para qué se usó:** escribir y ejecutar las 32 pruebas automatizadas del proyecto. Permite definir casos de prueba con `@Test`, organizar con `@DisplayName` y verificar resultados con `assertThat`.
+
+### Mockito + MockMvc
+**Qué es:** Mockito es una librería para crear objetos simulados (mocks) en pruebas. MockMvc es la utilidad de Spring para probar controladores HTTP sin levantar un servidor real.
+**Para qué se usó:** en las pruebas de controladores (`@WebMvcTest`), Mockito simula el comportamiento de los servicios y MockMvc simula las peticiones HTTP, haciendo las pruebas más rápidas y aisladas.
+
+### JaCoCo
+**Qué es:** plugin de Maven que mide la cobertura de código durante la ejecución de pruebas.
+**Para qué se usó:** generar un reporte que muestra qué porcentaje del código ejecutaron las pruebas. Resultado: **87% de instrucciones, 100% de métodos públicos**. El reporte se publica como artefacto en cada ejecución del pipeline.
+
+### Docker
+**Qué es:** plataforma de contenedores que empaqueta una aplicación con todo lo necesario para ejecutarla.
+**Para qué se usó:** empaquetar FlyTrack en una imagen reproducible. Resuelve el problema de "en mi máquina funciona" — la imagen corre igual en cualquier entorno.
+
+**Dockerfile multi-stage:**
+```dockerfile
+# Stage 1: compilar (Maven + JDK — imagen pesada, solo para build)
+FROM maven:3.9-eclipse-temurin-17 AS builder
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+COPY src ./src
+RUN mvn package -DskipTests -B
+
+# Stage 2: ejecutar (solo JRE — imagen liviana, sin código fuente)
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+```
+
+El multi-stage separa construcción de ejecución: la imagen final no contiene Maven, el JDK ni el código fuente — solo el JRE y el JAR. Esto hace la imagen más pequeña y segura.
+
+### Docker Compose
+**Qué es:** herramienta para definir y levantar servicios Docker con un solo comando.
+**Para qué se usó:** simplificar la ejecución local de FlyTrack. Con `docker compose up -d` se construye la imagen y levanta el contenedor sin comandos adicionales.
+
+### GitHub Actions
+**Qué es:** motor de automatización integrado a GitHub que ejecuta workflows definidos en YAML.
+**Para qué se usó:** orquestar el pipeline CI/CD completo. Cada push dispara automáticamente los jobs de prueba, construcción y publicación de la imagen Docker. Elimina el proceso manual de validar y desplegar.
+
+### GitHub Container Registry (GHCR)
+**Qué es:** registro de imágenes Docker integrado a GitHub (`ghcr.io`).
+**Para qué se usó:** publicar la imagen de FlyTrack como entorno de staging. Cada imagen lleva dos tags: `latest` (versión más reciente) y el SHA del commit (trazabilidad exacta). La autenticación usa `GITHUB_TOKEN` — sin secretos adicionales.
+
+### SonarQube (evaluado, no implementado)
+**Qué es:** plataforma de análisis estático de código que detecta bugs potenciales, code smells, código duplicado y deuda técnica.
+**Por qué no se implementó:** requiere un servidor propio o cuenta en SonarCloud. Para el alcance mínimo viable del laboratorio, JaCoCo cubre el concepto de calidad en el pipeline. En un proyecto de producción real, SonarQube y JaCoCo se usarían juntos.
+
+### Kubernetes (evaluado, no implementado)
+**Qué es:** orquestador de contenedores para gestionar múltiples instancias, escala automática y alta disponibilidad.
+**Por qué no se implementó:** FlyTrack es un servicio único sin requisitos de escala ni alta disponibilidad. Kubernetes agrega complejidad operacional (cluster, namespaces, manifiestos) que no aporta valor demostrable en este laboratorio. El concepto de despliegue controlado está cubierto con Docker + GHCR.
+
+---
+
+## Pruebas
+
+### Ejecutar todas las pruebas
+
+```bash
+cd flytrack
+mvn verify
+```
+
+Genera los reportes en:
+- `target/surefire-reports/` — resultados de pruebas
+- `target/site/jacoco/index.html` — cobertura de código (abrir en navegador)
+
+### Resumen de pruebas
+
+| Clase | Tipo | Casos | Cobertura |
+|-------|------|-------|-----------|
+| `VuelosServiceTest` | Unitaria | 6 | Búsqueda por ID, campos, IDs únicos |
+| `PuertasServiceTest` | Unitaria | 6 | Búsqueda por vuelo, case-insensitive |
+| `EquipajeServiceTest` | Unitaria | 6 | IDs incrementales, persistencia en lista |
+| `VuelosControllerTest` | Integración web | 4 | HTTP 200/404, JSON correcto |
+| `PuertasControllerTest` | Integración web | 4 | HTTP 200/404, JSON correcto |
+| `EquipajeControllerTest` | Integración web | 6 | HTTP 201/400, validaciones |
+| **Total** | | **32** | **87% instrucciones · 100% métodos** |
+
+---
+
+## Cómo ejecutar el proyecto
+
+### Con Maven (local)
+
+```bash
+cd flytrack
+mvn spring-boot:run
+```
+
+### Con Docker Compose
+
+```bash
+cd flytrack
+docker compose up -d
+```
+
+### Desde el registro de staging (GHCR)
+
+```bash
+docker pull ghcr.io/lyc4nthrope/flytrack:latest
+docker run -p 8080:8080 ghcr.io/lyc4nthrope/flytrack:latest
+```
+
+En todos los casos la aplicación queda disponible en `http://localhost:8080`.
+
+---
+
+## Documentación del laboratorio
+
+| Documento | Fase | Contenido |
+|-----------|------|-----------|
+| [`docs/diagnostico.md`](docs/diagnostico.md) | Fase 1 | ¿Qué es DevOps?, diagnóstico del flujo actual, herramientas identificadas |
+| [`docs/diseno-pipeline.md`](docs/diseno-pipeline.md) | Fase 2 | Diseño del pipeline CI/CD con diagrama, evaluación de SonarQube y Kubernetes |
+| [`docs/informe.md`](docs/informe.md) | Fase 4 | Informe técnico: decisiones tomadas, limitaciones, aprendizajes |
+| [`docs/presentacion.md`](docs/presentacion.md) | Fase 4 | Guía para la exposición en clase: slides, demo en vivo, preguntas del profesor |
+
+---
+
+## Estrategia de ramas
+
+Este proyecto usa **Git Flow**. El trabajo de cada integrante se desarrolla en su rama `feature/*` y se integra a `develop` mediante `merge --no-ff` para preservar la trazabilidad.
+
+```
+main ←── release/preproduccion ←── develop ←── feature/cristhian
+                                          ←── feature/camilo
+                                          ←── feature/jeyson
+         hotfix/produccion ──────────────────────────────────→ main
+```
+
+---
+
+## Equipo
+
+| Integrante | Rama |
+|------------|------|
+| Cristhian Osorio | `feature/cristhian` |
+| Camilo | `feature/camilo` |
+| Jeyson | `feature/jeyson` |
+
+**Universidad del Quindío · Facultad de Ingeniería · Ingeniería de Software III**

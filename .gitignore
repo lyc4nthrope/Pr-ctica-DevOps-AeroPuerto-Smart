@@ -1,0 +1,19 @@
+# Herramientas de IA / editor
+.claude/
+.codex
+.codex/
+
+# Maven
+flytrack/target/
+flytrack/.mvn/wrapper/maven-wrapper.jar
+!flytrack/.mvn/wrapper/maven-wrapper.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.eclipse
+
+# OS
+.DS_Store
+Thumbs.db
