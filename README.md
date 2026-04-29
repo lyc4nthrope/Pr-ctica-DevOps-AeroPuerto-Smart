@@ -314,7 +314,6 @@ En todos los casos la aplicación queda disponible en `http://localhost:8080`.
 | [`docs/diagnostico.md`](docs/diagnostico.md) | Fase 1 | ¿Qué es DevOps?, diagnóstico del flujo actual, herramientas identificadas |
 | [`docs/diseno-pipeline.md`](docs/diseno-pipeline.md) | Fase 2 | Diseño del pipeline CI/CD con diagrama, evaluación de SonarQube y Kubernetes |
 | [`docs/informe.md`](docs/informe.md) | Fase 4 | Informe técnico: decisiones tomadas, limitaciones, aprendizajes |
-| [`docs/presentacion.md`](docs/presentacion.md) | Fase 4 | Guía para la exposición en clase: slides, demo en vivo, preguntas del profesor |
 
 ---
 
