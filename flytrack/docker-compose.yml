@@ -1,0 +1,7 @@
+services:
+  flytrack:
+    build: .
+    container_name: flytrack-app
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
