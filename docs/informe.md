@@ -140,14 +140,36 @@ curl -X POST http://localhost:8080/api/equipaje/reporte \
 
 Los tres endpoints responden correctamente dentro del contenedor.
 
-## 5. Limitaciones
+## 5. Limitaciones y decisiones conscientes
+
+### 5.1 Limitaciones técnicas
 
 | Limitación | Razón |
 |------------|-------|
 | No hay base de datos | El alcance del laboratorio es DevOps, no persistencia. Los datos son en memoria y se pierden al reiniciar el contenedor |
 | No hay autenticación | Fuera del alcance; requeriría Spring Security y gestión de tokens |
-| No hay CD hacia una VM real | Se simula staging con GHCR; un despliegue real requeriría acceso a servidor |
-| SonarQube no incluido | Requiere servidor propio o cuenta SonarCloud; JaCoCo cubre el análisis de calidad para este alcance |
+| No hay CD hacia una VM real | Se simula staging con GHCR; un despliegue real requeriría acceso a servidor con IP pública |
+
+### 5.2 Herramientas evaluadas y no implementadas
+
+**SonarQube**
+
+El documento de la práctica lo menciona explícitamente como herramienta sugerida para análisis de calidad. Se evaluó y se decidió no implementarlo por las siguientes razones:
+
+- Requiere un servidor SonarQube propio o una cuenta en SonarCloud con permisos de organización.
+- La integración con GitHub Actions requiere configurar `SONAR_TOKEN` y `SONAR_HOST_URL` como secretos de repositorio.
+- Para el alcance mínimo viable del laboratorio, JaCoCo provee métricas de cobertura suficientes para demostrar el concepto de "análisis de calidad en el pipeline".
+
+La diferencia conceptual es importante: JaCoCo mide **cobertura** (qué porcentaje del código ejecutaron las pruebas), mientras que SonarQube realiza **análisis estático** (detecta bugs potenciales, code smells, código duplicado y deuda técnica sin ejecutar el código). En un proyecto real de producción, ambas herramientas se usarían juntas. En este laboratorio, JaCoCo con 87% de cobertura de instrucciones y 100% de métodos públicos demuestra el principio.
+
+**Kubernetes**
+
+También mencionado en el documento como herramienta sugerida para orquestación. Se evaluó y se descartó porque:
+
+- Kubernetes resuelve problemas de escala, alta disponibilidad y gestión de múltiples réplicas.
+- FlyTrack es un servicio único sin requisitos de escalado horizontal ni zero-downtime deployment.
+- La complejidad operacional (cluster, namespaces, manifiestos YAML, ingress controllers) no aporta valor demostrable para el alcance del laboratorio.
+- El equivalente funcional implementado —imagen Docker publicada en GHCR + docker-compose para ejecución— cubre el mismo concepto de despliegue reproducible y controlado.
 
 ## 6. Qué mejoró frente al proceso anterior
 

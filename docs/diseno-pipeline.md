@@ -121,3 +121,35 @@ Esto garantiza que el entorno de ejecución es idéntico al que pasó por el pip
 | `docker/login-action@v3` | Autenticación en GHCR con GITHUB_TOKEN |
 | `docker/build-push-action@v5` | Build multi-stage + push al registro |
 | GHCR (`ghcr.io`) | Registro de imágenes como entorno staging |
+
+## 8. Evaluación de herramientas sugeridas por el documento
+
+El documento de la práctica menciona explícitamente: Git, GitHub Actions/GitLab CI/Jenkins, Docker, Kubernetes y SonarQube. A continuación se evalúa cada una:
+
+### Git + GitHub
+**Rol**: control de versiones y colaboración.
+**Decisión**: implementado con estrategia Git Flow (ramas `main`, `develop`, `feature/*`, `release/*`, `hotfix/*`).
+**Por qué**: estándar de la industria, integración nativa con GitHub Actions, trazabilidad completa de cambios.
+
+### GitHub Actions
+**Rol**: motor CI/CD.
+**Decisión**: implementado. Pipeline de tres jobs: `test → build → docker-publish`.
+**Por qué sobre GitLab CI / Jenkins**: no requiere servidor propio, está integrado al repositorio y es gratuito para proyectos públicos. Jenkins requeriría mantener un servidor; GitLab CI requeriría migrar el repositorio a GitLab.
+
+### Docker
+**Rol**: empaquetado reproducible de la aplicación.
+**Decisión**: implementado con Dockerfile multi-stage y docker-compose.yml.
+**Por qué**: elimina el problema de entornos variables entre desarrolladores. La imagen producida es idéntica en cualquier máquina.
+
+### SonarQube
+**Rol**: análisis estático de calidad del código (bugs potenciales, code smells, duplicación, deuda técnica).
+**Decisión**: **no implementado en el pipeline**. Se usa JaCoCo como alternativa para métricas de cobertura.
+**Por qué no**: SonarQube requiere un servidor propio (SonarQube Community) o una cuenta en SonarCloud. Para un laboratorio estudiantil sin infraestructura de servidor, esa dependencia introduce complejidad operacional que está fuera del alcance mínimo viable.
+**Diferencia con JaCoCo**: JaCoCo mide *cuántas líneas ejecutaron las pruebas* (cobertura). SonarQube analiza *la calidad del código fuente* independientemente de las pruebas. Son complementarios, no equivalentes. En un pipeline de producción se usarían ambos.
+**Cómo se integraría**: añadiendo `sonar:sonar` como goal de Maven en el job `test`, con `SONAR_TOKEN` como secreto de repositorio y apuntando a `sonar.host.url`.
+
+### Kubernetes
+**Rol**: orquestación de contenedores (escalado, self-healing, rolling updates, gestión de múltiples réplicas).
+**Decisión**: **no implementado, fuera del alcance de este laboratorio**.
+**Por qué no**: Kubernetes resuelve problemas de escala y disponibilidad en producción (múltiples instancias, balanceo de carga, recuperación automática de fallos). FlyTrack es una aplicación de laboratorio con un solo servicio sin requisitos de alta disponibilidad. Introducir Kubernetes agregaría complejidad operacional (cluster, namespaces, deployments, services, ingress) que no aporta valor demostrable en este contexto.
+**Cuándo aplicaría**: si FlyTrack tuviera múltiples microservicios que necesitan escalar independientemente, o si el aeropuerto requiriera cero downtime durante despliegues. En ese caso, el `docker-publish` del pipeline sería reemplazado por un `kubectl rollout` o un ArgoCD sync.
