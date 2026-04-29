@@ -20,8 +20,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Ejecutar pruebas unitarias e integración
-        run: mvn -f flytrack/pom.xml test
+      - name: Ejecutar pruebas y generar reporte de cobertura
+        run: mvn -f flytrack/pom.xml verify
 
       - name: Publicar reporte de pruebas
         if: always()
@@ -29,6 +29,13 @@ jobs:
         with:
           name: surefire-reports
           path: flytrack/target/surefire-reports/
+
+      - name: Publicar reporte de cobertura JaCoCo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: flytrack/target/site/jacoco/
 
   build:
     name: Construir artefacto
@@ -52,3 +59,30 @@ jobs:
         with:
           name: flytrack-jar
           path: flytrack/target/*.jar
+
+  docker-publish:
+    name: Publicar imagen a staging (GHCR)
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Iniciar sesión en GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Construir y publicar imagen Docker
+        uses: docker/build-push-action@v5
+        with:
+          context: flytrack
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/flytrack:latest
+            ghcr.io/${{ github.repository_owner }}/flytrack:${{ github.sha }}
