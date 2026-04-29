@@ -1,0 +1,54 @@
+name: CI FlyTrack
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+
+jobs:
+  test:
+    name: Ejecutar pruebas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Ejecutar pruebas unitarias e integración
+        run: mvn -f flytrack/pom.xml test
+
+      - name: Publicar reporte de pruebas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: flytrack/target/surefire-reports/
+
+  build:
+    name: Construir artefacto
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Empaquetar aplicación
+        run: mvn -f flytrack/pom.xml package -DskipTests -B
+
+      - name: Publicar JAR como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: flytrack-jar
+          path: flytrack/target/*.jar
