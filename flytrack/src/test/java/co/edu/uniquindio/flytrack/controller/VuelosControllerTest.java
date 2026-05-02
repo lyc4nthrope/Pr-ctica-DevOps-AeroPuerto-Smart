@@ -71,4 +71,18 @@ class VuelosControllerTest {
         mockMvc.perform(get("/api/vuelos/3"))
                 .andExpect(jsonPath("$.numero").exists());
     }
+
+    @Test
+    @DisplayName("GET /api/vuelos retorna 200 y lista no vacía")
+    void findAll_retorna200() throws Exception {
+        when(vuelosService.findAll()).thenReturn(
+                List.of(new Vuelo(1L, "AV101", "Bogotá", "Medellín", "08:00", "A tiempo"))
+        );
+
+        mockMvc.perform(get("/api/vuelos"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].numero").value("AV101"));
+    }
+
 }

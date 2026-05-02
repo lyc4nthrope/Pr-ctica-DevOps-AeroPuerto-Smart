@@ -70,4 +70,18 @@ class PuertasControllerTest {
                 .andExpect(jsonPath("$.vuelo").exists())
                 .andExpect(jsonPath("$.terminal").exists());
     }
+
+    @Test
+    @DisplayName("GET /api/puertas retorna 200 y lista no vacía")
+    void findAll_retorna200() throws Exception {
+        when(puertasService.findAll()).thenReturn(
+                List.of(new Puerta("A12", "AV101", "Terminal Norte"))
+        );
+
+        mockMvc.perform(get("/api/puertas"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].puerta").value("A12"));
+    }
+
 }
