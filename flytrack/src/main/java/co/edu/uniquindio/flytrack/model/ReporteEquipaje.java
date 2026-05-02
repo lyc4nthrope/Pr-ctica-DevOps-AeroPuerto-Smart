@@ -1,10 +1,18 @@
 package co.edu.uniquindio.flytrack.model;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class ReporteEquipaje {
 
     private Long id;
+
+    @NotBlank
     private String pasajero;
+
+    @NotBlank
     private String vuelo;
+
+    @NotBlank
     private String descripcion;
 
     public ReporteEquipaje() {}

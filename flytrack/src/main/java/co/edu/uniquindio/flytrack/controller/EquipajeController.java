@@ -2,6 +2,7 @@ package co.edu.uniquindio.flytrack.controller;
 
 import co.edu.uniquindio.flytrack.model.ReporteEquipaje;
 import co.edu.uniquindio.flytrack.service.EquipajeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,13 +21,9 @@ public class EquipajeController {
     }
 
     @PostMapping("/reporte")
-    public ResponseEntity<ReporteEquipaje> crear(@RequestBody ReporteEquipaje reporte) {
-        if (reporte.getPasajero() == null || reporte.getPasajero().isBlank()
-                || reporte.getVuelo() == null || reporte.getVuelo().isBlank()
-                || reporte.getDescripcion() == null || reporte.getDescripcion().isBlank()) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<ReporteEquipaje> crear(@Valid @RequestBody ReporteEquipaje reporte) {
         ReporteEquipaje guardado = equipajeService.save(reporte);
         return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
     }
+
 }
