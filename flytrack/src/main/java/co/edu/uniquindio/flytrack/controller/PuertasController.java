@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/puertas")
 public class PuertasController {
@@ -24,4 +26,10 @@ public class PuertasController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping
+    public ResponseEntity<List<Puerta>> findAll() {
+        return ResponseEntity.ok(puertasService.findAll());
+    }
+
 }
