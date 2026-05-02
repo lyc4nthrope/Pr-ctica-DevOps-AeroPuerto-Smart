@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/vuelos")
 public class VuelosController {
@@ -24,4 +26,12 @@ public class VuelosController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping
+    public ResponseEntity<List<Vuelo>> findAll(){
+        return ResponseEntity.ok(vuelosService.findAll());
+    }
+
+
+
 }
