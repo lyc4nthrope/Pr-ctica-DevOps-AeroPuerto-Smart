@@ -131,7 +131,7 @@ jobs:
           echo "Esperando que Spring Boot inicie..."
           for i in $(seq 1 15); do
             if curl -sf http://localhost:8080/api/vuelos > /dev/null; then
-              echo "✅ Aplicación lista en intento $i"
+              echo " Aplicación lista en intento $i"
               break
             fi
             echo "Intento $i/15 — esperando 3s..."
@@ -142,21 +142,21 @@ jobs:
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/api/vuelos)
           echo "GET /api/vuelos → HTTP $STATUS"
-          [ "$STATUS" = "200" ] || (echo "❌ Falló" && exit 1)
+          [ "$STATUS" = "200" ] || (echo " Falló" && exit 1)
 
       - name: "Smoke test: GET /api/vuelos/1"
         run: |
           RESP=$(curl -sf http://localhost:8080/api/vuelos/1)
           echo "Respuesta: $RESP"
-          echo "$RESP" | grep -q '"numero"' || (echo "❌ JSON inválido" && exit 1)
-          echo "✅ Campo 'numero' presente"
+          echo "$RESP" | grep -q '"numero"' || (echo "JSON inválido" && exit 1)
+          echo "Campo 'numero' presente"
 
       - name: "Smoke test: GET /api/puertas/AV101"
         run: |
           RESP=$(curl -sf http://localhost:8080/api/puertas/AV101)
           echo "Respuesta: $RESP"
-          echo "$RESP" | grep -q '"puerta"' || (echo "❌ JSON inválido" && exit 1)
-          echo "✅ Campo 'puerta' presente"
+          echo "$RESP" | grep -q '"puerta"' || (echo "JSON inválido" && exit 1)
+          echo "Campo 'puerta' presente"
 
       - name: "Smoke test: POST /api/equipaje/reporte"
         run: |
@@ -165,14 +165,14 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{"pasajero":"Pipeline Test","vuelo":"AV101","descripcion":"Smoke test automatizado"}')
           echo "POST /api/equipaje/reporte → HTTP $STATUS"
-          [ "$STATUS" = "201" ] || (echo "❌ Falló (esperado 201, obtuvo $STATUS)" && exit 1)
-          echo "✅ Reporte creado correctamente"
+          [ "$STATUS" = "201" ] || (echo "Falló (esperado 201, obtuvo $STATUS)" && exit 1)
+          echo "Reporte creado correctamente"
 
       - name: "Smoke test: GET /api/puertas (nuevo endpoint)"
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/api/puertas)
           echo "GET /api/puertas → HTTP $STATUS"
-          [ "$STATUS" = "200" ] || (echo "❌ Falló" && exit 1)
+          [ "$STATUS" = "200" ] || (echo " Falló" && exit 1)
 
       - name: Limpiar contenedor de staging
         if: always()
@@ -189,12 +189,25 @@ jobs:
           echo "  Endpoints validados: 5/5"
           echo "============================================"
 
-  deploy-render:
-    name: Desplegar en Render
+  deploy-ec2:
+    name: Desplegar en AWS EC2
     needs: smoke-test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
-      - name: Trigger deploy en Render
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+      - name: Deploy en EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            docker stop flytrack-app || true
+            docker rm flytrack-app || true
+            docker pull ghcr.io/lyc4nthrope/flytrack:latest
+            docker run -d \
+              --name flytrack-app \
+              --restart unless-stopped \
+              -p 8080:8080 \
+              ghcr.io/lyc4nthrope/flytrack:latest
+            echo "FlyTrack desplegado en $(curl -s ifconfig.me):8080"
