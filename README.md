@@ -2,7 +2,7 @@
 
 **Universidad del Quindío · Ingeniería de Software III**
 
-Práctica de laboratorio DevOps sobre el caso AeroPuerto Smart. El objetivo no es construir una aplicación compleja sino demostrar un ciclo completo de DevOps: control de versiones, pruebas automatizadas, análisis de calidad, empaquetado con contenedores y despliegue automático a staging.
+Práctica de laboratorio DevOps sobre el caso AeroPuerto Smart. El objetivo no es construir una aplicación compleja sino demostrar un ciclo completo de DevOps: control de versiones, pruebas automatizadas, análisis de calidad, empaquetado con contenedores y despliegue automático a producción.
 
 ---
 
@@ -13,9 +13,10 @@ Práctica de laboratorio DevOps sobre el caso AeroPuerto Smart. El objetivo no e
 | Pruebas (34) + JaCoCo | ✅ Pasando |
 | Build JAR | ✅ Pasando |
 | Imagen Docker en GHCR | ✅ Publicada |
-| Deploy en Render | ✅ Desplegado |
+| Smoke test en staging efímero | ✅ Pasando |
+| Deploy en AWS EC2 | ✅ Desplegado |
 
-**🌐 App en producción:** [https://flytrack-ras8.onrender.com](https://flytrack-ras8.onrender.com)
+**🌐 App en producción:** [http://100.31.53.122:8080](http://100.31.53.122:8080)
 
 **Imagen en staging:**
 ```bash
@@ -137,6 +138,8 @@ src/main/resources/
 | `AtomicLong` para generación de IDs | Thread-safe sin sincronización explícita |
 | Sin Lombok | Sin dependencia extra; el código es explícito y legible |
 | Frontend estático en Spring Boot | Sin servidor adicional; `src/main/resources/static/` se sirve automáticamente |
+| `@Valid` + `@NotBlank` en EquipajeController | Validación declarativa via Bean Validation; elimina lógica manual en el controller |
+| `jacoco-maven-plugin` versión fijada a `0.8.12` | Evita resolución dinámica de versión que puede romper el build en futuras versiones de Maven |
 
 ---
 
@@ -179,13 +182,15 @@ Push / Pull Request
   │  · Destruye el contenedor               │
   │         │                               │
   │         ▼ solo en push a main           │
-  │  [deploy-render]                        │
-  │  · Trigger deploy en Render             │
+  │  [deploy-ec2]                           │
+  │  · SSH a instancia AWS EC2              │
+  │  · docker pull desde GHCR              │
+  │  · docker run con restart automático    │
   │  · App disponible en producción         │
   └─────────────────────────────────────────┘
 ```
 
-Si cualquier prueba falla en `[test]`, el pipeline se detiene. Nada llega a staging sin pasar las pruebas.
+Si cualquier prueba falla en `[test]`, el pipeline se detiene. Nada llega a producción sin pasar las pruebas.
 
 ### Artefactos publicados por el pipeline
 
@@ -245,7 +250,11 @@ Cada feature se integra a `develop` con `merge --no-ff` para preservar la trazab
 
 ### JaCoCo
 **Qué es:** plugin de Maven que mide la cobertura de código durante la ejecución de pruebas.
-**Para qué se usó:** generar un reporte de cobertura y aplicar un **gate de calidad activo** — el build falla automáticamente si la cobertura baja del umbral configurado. El reporte se publica como artefacto en cada ejecución del pipeline.
+**Para qué se usó:** generar un reporte de cobertura y aplicar un **gate de calidad activo** — el build falla automáticamente si la cobertura baja del umbral configurado. El reporte se publica como artefacto en cada ejecución del pipeline. Versión fijada a `0.8.12` para garantizar builds reproducibles.
+
+### Bean Validation (Jakarta)
+**Qué es:** especificación estándar de Java para validación declarativa de datos mediante anotaciones.
+**Para qué se usó:** validar los campos del `ReporteEquipaje` (`@NotBlank`) antes de procesarlos, eliminando la validación manual en el controller. Spring Boot activa la validación con `@Valid` en el parámetro del método.
 
 ### Docker
 **Qué es:** plataforma de contenedores que empaqueta una aplicación con todo lo necesario para ejecutarla.
@@ -275,15 +284,15 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ### GitHub Actions
 **Qué es:** motor de automatización integrado a GitHub que ejecuta workflows definidos en YAML.
-**Para qué se usó:** orquestar el pipeline CI/CD completo de 5 jobs: test → build → docker-publish → smoke-test → deploy-render.
+**Para qué se usó:** orquestar el pipeline CI/CD completo de 5 jobs: test → build → docker-publish → smoke-test → deploy-ec2.
 
 ### GitHub Container Registry (GHCR)
 **Qué es:** registro de imágenes Docker integrado a GitHub (`ghcr.io`).
 **Para qué se usó:** publicar la imagen de FlyTrack como entorno de staging. Cada imagen lleva dos tags: `latest` y el SHA del commit.
 
-### Render
-**Qué es:** plataforma de despliegue en la nube con integración nativa a GitHub.
-**Para qué se usó:** despliegue automático a producción. Cada push a `main` que pasa el pipeline dispara un redespliegue en Render, dejando la app disponible en una URL pública permanente.
+### AWS EC2
+**Qué es:** servicio de máquinas virtuales en la nube de Amazon Web Services.
+**Para qué se usó:** alojar la instancia de producción donde corre FlyTrack en un contenedor Docker. El job `deploy-ec2` del pipeline se conecta via SSH, descarga la imagen desde GHCR y levanta el contenedor automáticamente en cada push a `main`.
 
 ### SonarQube (evaluado, no implementado)
 **Qué es:** plataforma de análisis estático de código.
@@ -291,7 +300,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ### Kubernetes (evaluado, no implementado)
 **Qué es:** orquestador de contenedores para gestionar múltiples instancias, escala automática y alta disponibilidad.
-**Por qué no se implementó:** FlyTrack es un servicio único sin requisitos de escala. El concepto de despliegue controlado está cubierto con Docker + GHCR + Render.
+**Por qué no se implementó:** FlyTrack es un servicio único sin requisitos de escala. El concepto de despliegue controlado está cubierto con Docker + GHCR + AWS EC2.
 
 ---
 
